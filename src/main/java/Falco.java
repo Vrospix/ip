@@ -22,12 +22,21 @@ public class Falco {
         System.out.println("What can I do for you?");
         System.out.println(border);
 
+        Falco falco = new Falco();
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while(!input.equals("bye")) {
-            System.out.println(border);
-            System.out.println(input + "? Yessir!");
-            System.out.println(border);
+            if (input.equals("list")) {
+                System.out.println(border);
+                falco.printList();
+                System.out.println(border);
+            } else {
+                falco.insertList(input);
+                System.out.println(border);
+                System.out.println("Yessir! added: " + input);
+                System.out.println(border);
+            }
 
             input = sc.nextLine();
         }
