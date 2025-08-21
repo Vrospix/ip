@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Falco {
     public static void main(String[] args) {
         System.out.println("_________________________________");
