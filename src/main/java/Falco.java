@@ -18,6 +18,6 @@ public class Falco {
             input = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("_________________________________");
+        System.out.println(border);
     }
 }
