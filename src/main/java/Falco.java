@@ -11,7 +11,7 @@ public class Falco {
     public void printList() {
         int n = list.size();
         for(int i = 0; i < n; i++) {
-            System.out.println(i + ". " + list.get(i));
+            System.out.println(i + 1 + ". " + list.get(i));
         }
     }
 
