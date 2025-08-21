@@ -2,6 +2,19 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Falco {
+    ArrayList<String> list = new ArrayList<>();
+
+    public void insertList(String task) {
+        list.add(task);
+    }
+
+    public void printList() {
+        int n = list.size();
+        for(int i = 0; i < n; i++) {
+            System.out.println(i + ". " + list.get(i));
+        }
+    }
+
     public static void main(String[] args) {
         String border = "_________________________________";
         System.out.println(border);
