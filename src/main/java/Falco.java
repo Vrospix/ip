@@ -22,23 +22,42 @@ public class Falco {
         bordify(message);
     }
 
-    /** Get the specific task from list **/
+    /** Get task-'i' from list **/
     public Task getTask(int i) {
         return list.get(i);
     }
 
+    /** Delete the task-'i' from list **/
+    public void deleteTask(int i) throws FalcoException {
+        try {
+            Task removedTask = getTask(i);
+            list.remove(i);
+
+            String message = "Understandable Sir. I've removed this task: " +
+                    "\n\t" + removedTask +
+                    "\nNow you have " + list.size() + " tasks in the list, Sir! (￣^￣ )ゞ";
+            bordify(message);
+        } catch (Exception e) {
+            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+        }
+    }
+
     /** Mark or Unmark the specific task in list **/
-    public void markList(String action, int i) {
-        if (action.equals("mark")) {
-            list.get(i).mark();
-            String message = "Yessir! (￣^￣ )ゞ I've marked this task as done: " +
-                            "\n\t" + getTask(i);
-            bordify(message);
-        } else {
-            list.get(i).unmark();
-            String message = "Affirmative! (￣^￣ )ゞ I've marked this task as not done: " +
-                            "\n\t" + getTask(i);
-            bordify(message);
+    public void markList(String action, int i) throws FalcoException {
+        try {
+            if (action.equals("mark")) {
+                list.get(i).mark();
+                String message = "Yessir! (￣^￣ )ゞ I've marked this task as done: " +
+                        "\n\t" + getTask(i);
+                bordify(message);
+            } else {
+                list.get(i).unmark();
+                String message = "Affirmative! (￣^￣ )ゞ I've marked this task as not done: " +
+                        "\n\t" + getTask(i);
+                bordify(message);
+            }
+        } catch (Exception e) {
+            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
         }
     }
 
@@ -72,14 +91,31 @@ public class Falco {
         String input = sc.nextLine();
         while(!input.equals("bye")) {
             try {
-                if (input.toLowerCase().startsWith("list")) {
+                if (input.equalsIgnoreCase("list")) {
                     falco.printList();
+                } else if (input.toLowerCase().startsWith("delete")) {
+                    String[] parts = input.split(" ");
+                    if (parts.length == 1) { throw new FalcoException(FalcoException.ErrorType.UNCLEAR_DELETE); }
+                    try {
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        falco.deleteTask(index);
+                    } catch (FalcoException e) {
+                        throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+                    } catch (Exception e) {
+                        throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
+                    }
 
                 } else if (input.toLowerCase().startsWith("mark") || input.toLowerCase().startsWith("unmark")) {
                     String[] parts = input.split(" ");
-                    int index = Integer.parseInt(parts[1]) - 1;
-                    falco.markList(parts[0], index);
-
+                    if (parts.length == 1) { throw new FalcoException(FalcoException.ErrorType.UNCLEAR_MARK); }
+                    try {
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        falco.markList(parts[0], index);
+                    } catch (FalcoException e) {
+                        throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+                    } catch (Exception e) {
+                        throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
+                    }
                 } else if (input.toLowerCase().startsWith("deadline")) {
                     String[] parts = input.split(" ", 2);
                     if (parts.length == 1) { throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK); }
