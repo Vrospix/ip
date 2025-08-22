@@ -4,7 +4,6 @@
 	What can I do for you?
 	__________________________________________________________________
 	__________________________________________________________________
-
 	Yessir! I've added this task: 
 		[T][ ] borrow book
 	Now you have 1 tasks in the list, Sir! (￣^￣ )ゞ
@@ -30,15 +29,15 @@
 	Now you have 5 tasks in the list, Sir! (￣^￣ )ゞ
 	__________________________________________________________________
 	__________________________________________________________________
-	Yessir! (￣^￣ )ゞ I've marked this task as done:
+	Yessir! (￣^￣ )ゞ I've marked this task as done: 
 		[T][X] borrow book
 	__________________________________________________________________
 	__________________________________________________________________
-	Yessir! (￣^￣ )ゞ I've marked this task as done:
+	Yessir! (￣^￣ )ゞ I've marked this task as done: 
 		[T][X] read book
 	__________________________________________________________________
 	__________________________________________________________________
-	Yessir! (￣^￣ )ゞ I've marked this task as done:
+	Yessir! (￣^￣ )ゞ I've marked this task as done: 
 		[T][X] buy bread
 	__________________________________________________________________
 	__________________________________________________________________
@@ -48,12 +47,12 @@
 	__________________________________________________________________
 	__________________________________________________________________
 	Sir, here are the tasks in your list: (￣^￣ )ゞ
-	1. [T][X] borrow book
-	2. [T][X] buy bread
-	3. [E][ ] event zoom meeting (from: Monday 6pm to: 8pm)
-	4. [D][ ] deadline submit homework (by: Aug 30th 4pm)
-	5. [T][X] todo read book
-	6. [D][ ] deadline return book (by: Monday 1pm)
+	1.[T][X] borrow book
+	2.[T][X] buy bread
+	3.[E][ ] zoom meeting (from: Monday 6pm to: 8pm)
+	4.[D][ ] submit homework (by: Aug 30th 4pm)
+	5.[T][X] read book
+	6.[D][ ] return book (by: Monday 1pm)
 	__________________________________________________________________
 	__________________________________________________________________
 	Affirmative! (￣^￣ )ゞ I've marked this task as not done: 
@@ -65,12 +64,12 @@
 	__________________________________________________________________
 	__________________________________________________________________
 	Sir, here are the tasks in your list: (￣^￣ )ゞ
-	1. [T][X] borrow book
-	2. [T][ ] buy bread
-	3. [E][ ] event zoom meeting (from: Monday 6pm to: 8pm)
-	4. [D][ ] deadline submit homework (by: Aug 30th 4pm)
-	5. [T][ ] todo read book
-	6. [D][ ] deadline return book (by: Monday 1pm)
+	1.[T][X] borrow book
+	2.[T][ ] buy bread
+	3.[E][ ] zoom meeting (from: Monday 6pm to: 8pm)
+	4.[D][ ] submit homework (by: Aug 30th 4pm)
+	5.[T][ ] read book
+	6.[D][ ] return book (by: Monday 1pm)
 	__________________________________________________________________
 	__________________________________________________________________
 	Bye Sir! It's an honor to work with you! (￣^￣ )ゞ
