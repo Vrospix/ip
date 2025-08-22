@@ -112,7 +112,7 @@ public class Falco {
 
             input = sc.nextLine();
         }
-        System.out.println("Bye! It's an honor to work with you! o7");
+        System.out.println("Bye Sir! It's an honor to work with you! (￣^￣ )ゞ");
         System.out.println(falco.border);
     }
 }

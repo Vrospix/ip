@@ -1,0 +1,11 @@
+todo borrow book
+todo buy bread
+event zoom meeting /from Monday 6pm /to 8pm
+deadline submit homework /by Aug 30th 4pm
+todo read book
+mark 1
+mark 5
+mark 2
+deadline return book /by Monday 1pm
+list
+bye
