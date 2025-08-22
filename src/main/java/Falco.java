@@ -22,8 +22,16 @@ public class Falco {
     public void markList(String action, int i) {
         if (action.equals("mark")) {
             list.get(i).mark();
+            System.out.println(border);
+            System.out.println("\tYessir! (￣^￣ )ゞ I've marked this task as done: ");
+            System.out.println("\t\t" + getTask(i));
+            System.out.println(border);
         } else {
             list.get(i).unmark();
+            System.out.println(border);
+            System.out.println("\tAffirmative! (￣^￣ )ゞ I've marked this task as not done: ");
+            System.out.println("\t\t" + getTask(i));
+            System.out.println(border);
         }
     }
 
@@ -61,18 +69,6 @@ public class Falco {
                 String[] parts = input.split(" ");
                 int index = Integer.parseInt(parts[1]) - 1;
                 falco.markList(parts[0], index);
-
-                if (parts[0].equals("mark")) {
-                    System.out.println(falco.border);
-                    System.out.println("\tYessir! (￣^￣ )ゞ I've marked this task as done: ");
-                    System.out.println("\t\t" + falco.getTask(index));
-                    System.out.println(falco.border);
-                } else {
-                    System.out.println(falco.border);
-                    System.out.println("\tAffirmative! (￣^￣ )ゞ I've marked this task as not done: ");
-                    System.out.println("\t\t" + falco.getTask(index));
-                    System.out.println(falco.border);
-                }
 
             } else  if (input.startsWith("deadline")) {
                 String[] parts = input.split(" ", 2);
