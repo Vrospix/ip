@@ -8,4 +8,7 @@ mark 5
 mark 2
 deadline return book /by Monday 1pm
 list
+unmark 2
+unmark 5
+list
 bye
