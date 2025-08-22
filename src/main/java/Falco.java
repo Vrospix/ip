@@ -29,10 +29,12 @@ public class Falco {
 
     public void printList() {
         int n = list.size();
+        System.out.println(border);
         System.out.println("\tSir, here are the tasks in your list: (￣^￣ )ゞ");
         for(int i = 0; i < n; i++) {
             System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
         }
+        System.out.println(border);
     }
 
     public void greetings() {
@@ -112,7 +114,7 @@ public class Falco {
 
             input = sc.nextLine();
         }
-        System.out.println("Bye Sir! It's an honor to work with you! (￣^￣ )ゞ");
+        System.out.println("\tBye Sir! It's an honor to work with you! (￣^￣ )ゞ");
         System.out.println(falco.border);
     }
 }

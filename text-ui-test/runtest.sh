@@ -1,7 +1,7 @@
 @ECHO OFF
 
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist C:\Users\vigok\Documents\NUS Importance\CS Y2S1\CS2103T\Chatbot\bin mkdir C:\Users\vigok\Documents\NUS Importance\CS Y2S1\CS2103T\Chatbot\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
