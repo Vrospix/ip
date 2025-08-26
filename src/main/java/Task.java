@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private boolean done;
     private final String task;
 
@@ -14,6 +14,16 @@ public class Task {
     public void unmark() {
         this.done = false;
     }
+
+    public boolean isDone() {
+        return this.done;
+    }
+
+    public String getDescription() {
+        return this.task;
+    }
+
+    public abstract String getType();
 
     @Override
     public String toString() {

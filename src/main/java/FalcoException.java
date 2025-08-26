@@ -6,7 +6,8 @@ public class FalcoException extends Exception{
         UNCLEAR_EVENT,
         UNCLEAR_DELETE,
         UNCLEAR_MARK,
-        OUTOFBOUNDS
+        OUTOFBOUNDS,
+        EMPTY_LIST
     }
 
     private ErrorType type;
@@ -37,7 +38,10 @@ public class FalcoException extends Exception{
         case OUTOFBOUNDS:
             return "Sir, that number is invalid. (ಠ_ಠ)" +
                     "\nTry checking the task-list by typing: List";
-        default:
+        case EMPTY_LIST:
+            return "Sir, you haven't added any task yet (ಠ_ಠ)" +
+                    "\nTry adding some task first";
+            default:
             return "I don't understand, Sir ૮(˶ㅠ︿ㅠ)ა";
         }
     }

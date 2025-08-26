@@ -8,6 +8,19 @@ public class Event extends Task {
         this.toTime = toTime;
     }
 
+    public String getFrom() {
+        return this.fromTime;
+    }
+
+    public String getTo() {
+        return this.toTime;
+    }
+
+    @Override
+    public String getType() {
+        return "E";
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.fromTime

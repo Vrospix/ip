@@ -6,6 +6,14 @@ public class Deadline extends Task {
         this.bytime = bytime;
     }
 
+    public String getBytime() {
+        return this.bytime;
+    }
+    @Override
+    public String getType() {
+        return "D";
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.bytime + ")";
