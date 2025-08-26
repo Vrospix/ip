@@ -7,7 +7,8 @@ public class FalcoException extends Exception{
         UNCLEAR_DELETE,
         UNCLEAR_MARK,
         OUTOFBOUNDS,
-        EMPTY_LIST
+        EMPTY_LIST,
+        WRONGFORMATTIME
     }
 
     private ErrorType type;
@@ -41,8 +42,11 @@ public class FalcoException extends Exception{
         case EMPTY_LIST:
             return "Sir, you haven't added any task yet (ಠ_ಠ)" +
                     "\nTry adding some task first";
-            default:
-            return "I don't understand, Sir ૮(˶ㅠ︿ㅠ)ა";
+        case WRONGFORMATTIME:
+            return "Sir, please format your time: dd/MM/yyyy HHmm | e.g. 12/10/2019 1800" +
+                    "\n that way I can understand it, Sir (ಠ_ಠ)";
+        default:
+        return "I don't understand, Sir ૮(˶ㅠ︿ㅠ)ა";
         }
     }
 }

@@ -1,19 +1,36 @@
-public class Event extends Task {
-    private String fromTime;
-    private String toTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Event(String task, String fromTime, String toTime) {
+public class Event extends Task {
+    private LocalDateTime fromTime;
+    private LocalDateTime toTime;
+
+    public Event(String task, String fromTime, String toTime) throws FalcoException {
         super(task);
-        this.fromTime = fromTime;
-        this.toTime = toTime;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            this.fromTime = LocalDateTime.parse(fromTime, formatter);
+            this.toTime = LocalDateTime.parse(toTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new FalcoException(FalcoException.ErrorType.WRONGFORMATTIME);
+        }
     }
 
     public String getFrom() {
-        return this.fromTime;
+        return this.fromTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+    }
+
+    public String getFromFormatted() {
+        return this.fromTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
     }
 
     public String getTo() {
-        return this.toTime;
+        return this.toTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+    }
+
+    public String getToFormatted() {
+        return this.toTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
     }
 
     @Override
@@ -23,7 +40,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.fromTime
-                + " to: " + this.toTime + ")";
+        return "[E]" + super.toString() + " (from: " + getFromFormatted()
+                + " to: " + getToFormatted() + ")";
     }
 }

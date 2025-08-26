@@ -11,7 +11,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, FalcoException {
         File file = new File(filePath);
         if (!file.exists()) {
             file.getParentFile().mkdirs(); // Create ./data if not exists
@@ -25,7 +25,7 @@ public class Storage {
         return taskList;
     }
 
-    public Task textToTask(String text) {
+    public Task textToTask(String text) throws FalcoException {
         String[] parts = text.split("\\|", 5);
         Task task;
         if (parts[0].trim().equals("D")) {
@@ -65,7 +65,7 @@ public class Storage {
         if (task instanceof Deadline) {
             message = message + task.getDescription() + " | " + ((Deadline) task).getBytime();
         } else if (task instanceof Event) {
-            message = message + task.getDescription() + " | " + ((Event) task).getFrom() + "-" + ((Event) task).getTo();
+            message = message + task.getDescription() + " | " + ((Event) task).getFrom() + " - " + ((Event) task).getTo();
         } else {
             message =  message + task.getDescription();
         }

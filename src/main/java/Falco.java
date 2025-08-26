@@ -16,12 +16,17 @@ public class Falco {
         this.storage = new Storage(LIST_PATH);
         try {
             this.list = storage.load();
+        } catch (FalcoException ex) {
+            String message = "The file time format is wrong... resetting the list ૮(˶ㅠ︿ㅠ)ა";
+            bordify(message);
+            resetList();
         } catch (IOException e) {
             String message = "Something went wrong when loading the list file... ૮(˶ㅠ︿ㅠ)ა";
             bordify(message);
-            this.list = new ArrayList<>();
+            resetList();
         }
     }
+
     /**
      * Put border before and after message
      *
@@ -196,7 +201,7 @@ public class Falco {
                     String remaining = parts[1];
 
                     String[] details = remaining.split("/by", 2);
-                    if (details.length == 1) { throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE); }
+                    if (details.length == 1 || details[1].isBlank()) { throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE); }
                     String desc = details[0].trim();
                     String time = details[1].trim();
 
@@ -214,7 +219,7 @@ public class Falco {
                     String time = details[1];
 
                     String[] spantime = time.split("/to", 2);
-                    if (spantime.length == 1) { throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT); }
+                    if (spantime.length == 1 || spantime[1].isBlank()) { throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT); }
                     String from = spantime[0].trim();
                     String to = spantime[1].trim();
 
