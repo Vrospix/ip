@@ -1,48 +1,117 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Falco {
-    private ArrayList<Task> list = new ArrayList<>();
-    private final String border = "_________________________________________________________" +
+    private ArrayList<Task> list;
+    private final String BORDER = "_________________________________________________________" +
             "_______________________________________________";
+    private final static String LIST_PATH = "./data/falcolist.txt";
+    private Storage storage;
 
-    /** Put border before and after text **/
+    /**
+     * Constructor for Falco class
+     */
+    public Falco() {
+        this.storage = new Storage(LIST_PATH);
+        try {
+            this.list = storage.load();
+        } catch (IOException e) {
+            String message = "Something went wrong when loading the list file... ૮(˶ㅠ︿ㅠ)ა";
+            bordify(message);
+            this.list = new ArrayList<>();
+        }
+    }
+    /**
+     * Put border before and after message
+     *
+     * @param message
+     */
     public void bordify(String message) {
-        String result = border + "\n" + message + "\n" + border;
+        String result = BORDER + "\n" + message + "\n" + BORDER;
         System.out.println(result.indent(4));
     }
 
-    /** Insert a task inside the list **/
-    public void insertList(Task task) {
-        list.add(task);
-
-        String message = "Yessir! I've added this task: " +
-                        "\n\t" + task +
-                        "\nNow you have " + list.size() + " tasks in the list, Sir! (￣^￣ )ゞ";
+    /**
+     * Reset the list back to empty
+     */
+    public void resetList() {
+        this.list = new ArrayList<>();
+        String message = "I've reset the list, Sir! (￣^￣ )ゞ";
         bordify(message);
+        saveList();
     }
 
-    /** Get task-'i' from list **/
+    /**
+     * Save task list to a .txt file inside data folder
+     */
+    public void saveList() {
+        try {
+            this.storage.save(this.list);
+        } catch (IOException e) {
+            String message = "Uh..I can't seem to save the list to the file, Sir (ಠ_ಠ)" +
+                            "\nPerhaps you should try delete and create a new falcolist.txt in data folder";
+            bordify(message);
+        }
+    }
+
+    /**
+     * Insert a task inside the list
+     *
+     * @param task
+     */
+    public void insertList(Task task) {
+        list.add(task);
+        String taskText = (list.size() == 1) ? " task"  : " tasks";
+        String message = "Yessir! I've added this task: " +
+                        "\n\t" + task +
+                        "\nNow you have " + list.size() + taskText + " in the list, Sir! (￣^￣ )ゞ";
+        bordify(message);
+        saveList();
+    }
+
+    /**
+     * Get task-'i' from list
+     *
+     * @param i
+     * @return a task from the list
+     */
     public Task getTask(int i) {
         return list.get(i);
     }
 
-    /** Delete the task-'i' from list **/
+    /**
+     * Delete the designated task-'i' from the list
+     *
+     * @param i
+     * @throws FalcoException
+     */
     public void deleteTask(int i) throws FalcoException {
-        try {
-            Task removedTask = getTask(i);
-            list.remove(i);
+        if (list.isEmpty()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+        } else {
+            try {
+                Task removedTask = getTask(i);
+                list.remove(i);
 
-            String message = "Understandable Sir. I've removed this task: " +
-                    "\n\t" + removedTask +
-                    "\nNow you have " + list.size() + " tasks in the list, Sir! (￣^￣ )ゞ";
-            bordify(message);
-        } catch (Exception e) {
-            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+                String message = "Understandable Sir. I've removed this task: " +
+                        "\n\t" + removedTask +
+                        "\nNow you have " + list.size() + " tasks in the list, Sir! (￣^￣ )ゞ";
+                bordify(message);
+            } catch (RuntimeException e) {
+                throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+            }
         }
+        saveList();
     }
 
-    /** Mark or Unmark the specific task in list **/
+    /**
+     * Mark or Unmark the specific task in list
+     *
+     * @param action
+     * @param i
+     * @throws FalcoException
+     */
     public void markList(String action, int i) throws FalcoException {
         try {
             if (action.equals("mark")) {
@@ -59,13 +128,16 @@ public class Falco {
         } catch (Exception e) {
             throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
         }
+        saveList();
     }
 
-    /** Print out all the task inside list **/
-    public void printList() {
+    /**
+     * Print out all the task inside list
+     */
+    public void printList() throws FalcoException{
         int n = list.size();
-        if (n == 0) {
-            bordify("Sir, you haven't added any task yet (ಠ_ಠ)");
+        if (list.isEmpty()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
         } else {
             StringBuilder message = new StringBuilder("Sir, here are the tasks in your list: (￣^￣ )ゞ");
             for (int i = 0; i < n; i++) {
@@ -75,7 +147,9 @@ public class Falco {
         }
     }
 
-    /** Greeting command **/
+    /**
+     * Give greeting texts
+     */
     public void greetings() {
         String message = "Hello Sir! I'm Falco (￣^￣ )ゞ " +
                         "\nIt's an honor to be here" +
@@ -93,15 +167,15 @@ public class Falco {
             try {
                 if (input.equalsIgnoreCase("list")) {
                     falco.printList();
+                } else if (input.equalsIgnoreCase("reset")) {
+                    falco.resetList();
                 } else if (input.toLowerCase().startsWith("delete")) {
                     String[] parts = input.split(" ");
                     if (parts.length == 1) { throw new FalcoException(FalcoException.ErrorType.UNCLEAR_DELETE); }
                     try {
                         int index = Integer.parseInt(parts[1]) - 1;
                         falco.deleteTask(index);
-                    } catch (FalcoException e) {
-                        throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
-                    } catch (Exception e) {
+                    } catch (RuntimeException e) {
                         throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
                     }
 
