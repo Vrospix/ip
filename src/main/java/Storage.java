@@ -44,7 +44,8 @@ public class Storage {
         return task;
     }
 
-    public void save(ArrayList<Task> taskList) throws IOException {
+    public void save(TaskList tasks) throws IOException {
+        ArrayList<Task> taskList = tasks.getList();
         FileWriter fw = new FileWriter(this.filePath, false);
         for(Task task : taskList) {
             String text = taskToText(task);
