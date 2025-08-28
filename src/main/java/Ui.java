@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private final String BORDER = "_________________________________________________________" +
+    private final static String BORDER = "_________________________________________________________" +
             "_______________________________________________";
 
     public Ui() {}
@@ -15,6 +15,12 @@ public class Ui {
     public void bordify(String message) {
         String result = BORDER + "\n" + message + "\n" + BORDER;
         System.out.println(result.indent(4));
+    }
+
+    public String askInput() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        return input;
     }
 
     /**
@@ -39,11 +45,6 @@ public class Ui {
     public void showSavingError() {
         String message = "Uh..I can't seem to save the list to the file, Sir (ಠ_ಠ)" +
                 "\nPerhaps you should try delete and create a new falcolist.txt in data folder";
-        bordify(message);
-    }
-
-    public void wrongTimeFormat() {
-        String message = "The file time format is wrong... resetting the list ૮(˶ㅠ︿ㅠ)ა";
         bordify(message);
     }
 
