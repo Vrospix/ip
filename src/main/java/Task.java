@@ -1,22 +1,22 @@
 public abstract class Task {
-    private boolean done;
+    private boolean isDone;
     private final String task;
 
     public Task(String task) {
-        this.done = false;
+        this.isDone = false;
         this.task = task;
     }
 
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getDescription() {
@@ -27,7 +27,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.task;
         } else {
             return "[ ] " + this.task;

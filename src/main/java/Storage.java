@@ -20,12 +20,12 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner s = new Scanner(file);
         while(s.hasNext()) {
-            taskList.add(textToTask(s.nextLine()));
+            taskList.add(turnTextToTask(s.nextLine()));
         }
         return taskList;
     }
 
-    public Task textToTask(String text) throws FalcoException {
+    public Task turnTextToTask(String text) throws FalcoException {
         String[] parts = text.split("\\|", 5);
         Task task;
         if (parts[0].trim().equals("D")) {
@@ -48,13 +48,13 @@ public class Storage {
         ArrayList<Task> taskList = tasks.getList();
         FileWriter fw = new FileWriter(this.filePath, false);
         for(Task task : taskList) {
-            String text = taskToText(task);
+            String text = turnTaskToText(task);
             fw.append(text + "\n");
         }
         fw.close();
     }
 
-    public String taskToText(Task task) {
+    public String turnTaskToText(Task task) {
         String message = task.getType();
 
         if (task.isDone()) {

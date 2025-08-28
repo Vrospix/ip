@@ -20,8 +20,9 @@ public class Falco {
     }
 
     public void run() {
-        Parser parse = new Parser(tasks, storage, ui);
-        parse.execute();
+        ui.greetings();
+        Parser parser = new Parser(tasks, storage);
+        parser.parse(ui.askInput());
     }
 
     public static void main(String[] args) {
