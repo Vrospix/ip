@@ -1,3 +1,5 @@
+package falco.task;
+
 public abstract class Task {
     private boolean isDone;
     private final String task;
