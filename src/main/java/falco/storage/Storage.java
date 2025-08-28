@@ -40,8 +40,10 @@ public class Storage {
         } else if (parts[0].trim().equals("E")) {
             String[] times = parts[3].trim().split("-", 2);
             task = new Event(parts[2].trim(), times[0].trim(), times[1].trim());
-        } else {
+        } else if (parts[0].trim().equals("T")) {
             task = new Todo(parts[2].trim());
+        } else {
+            throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
         }
 
         if (parts[1].trim().equalsIgnoreCase("1")) {

@@ -2,7 +2,7 @@ package falco.task;
 
 public abstract class Task {
     private boolean isDone;
-    private final String task;
+    private String task;
 
     public Task(String task) {
         this.isDone = false;
@@ -23,6 +23,10 @@ public abstract class Task {
 
     public String getDescription() {
         return this.task;
+    }
+
+    public void changeDescription(String newDesc) {
+        this.task = newDesc;
     }
 
     public abstract String getType();
