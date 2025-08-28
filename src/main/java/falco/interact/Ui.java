@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package falco.interact;
+
+import falco.exception.FalcoException;
+import falco.storage.TaskList;
+import falco.task.Task;
 import java.util.Scanner;
 
 public class Ui {
@@ -27,7 +31,7 @@ public class Ui {
      * Give greeting texts
      */
     public void greetings() {
-        String message = "Hello Sir! I'm Falco (￣^￣ )ゞ " +
+        String message = "Hello Sir! I'm falco.interact.Falco (￣^￣ )ゞ " +
                 "\nIt's an honor to be here" +
                 "\nWhat can I do for you?";
         bordify(message);

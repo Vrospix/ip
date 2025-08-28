@@ -1,3 +1,12 @@
+package falco.interact;
+
+import falco.exception.FalcoException;
+import falco.storage.Storage;
+import falco.storage.TaskList;
+import falco.task.Deadline;
+import falco.task.Event;
+import falco.task.Task;
+import falco.task.Todo;
 import java.io.IOException;
 
 public class Parser {
@@ -129,8 +138,9 @@ public class Parser {
         storage.save(tasks);
     }
 
-    public void parse(String input) {
-        while (!input.equals("bye")) {
+    public void parse(String text) {
+        String input = text;
+        while (!input.equalsIgnoreCase("bye")) {
             try {
                 if (input.equalsIgnoreCase("list")) {
                     executeList();
@@ -156,7 +166,7 @@ public class Parser {
             } catch (IOException e) {
                 ui.showSavingError();
             }
-            ui.askInput();
+            input = ui.askInput();
         }
         ui.goodbye();
     }
