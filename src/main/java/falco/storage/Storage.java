@@ -11,13 +11,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a <code>storage</code> to save a <code>TaskList</code>.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates an instance of <code>Storage</code> with the designated file path.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Read, transform, and load the saved file in the file path.
+     * If fails to create a new file, throws an <code>IOException</code>.
+     * If fails to turn text to a task, throws a <code>FalcoException</code>.
+     *
+     * @return An arrayList of tasks
+     * @throws IOException if fails to create new file
+     * @throws FalcoException if fails to turn text to a task
+     */
     public ArrayList<Task> load() throws IOException, FalcoException {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -32,6 +48,14 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Turns the specific text into an instance of <code>Task</code>.
+     * If text is formatted wrong, throws a <code>FalcoException</code>.
+     *
+     * @param text Text that represents a task
+     * @return Task
+     * @throws FalcoException If text is formatted wrong
+     */
     public Task turnTextToTask(String text) throws FalcoException {
         String[] parts = text.split("\\|", 5);
         Task task;
@@ -53,6 +77,13 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Save the <code>TaskList</code> to the designated file.
+     * If save process goes wrong, throws an <code>IOException</code>.
+     *
+     * @param tasks List of tasks
+     * @throws IOException If save process goes wrong
+     */
     public void save(TaskList tasks) throws IOException {
         ArrayList<Task> taskList = tasks.getList();
         FileWriter fw = new FileWriter(this.filePath, false);
@@ -63,6 +94,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Turn the corresponding <code>task</code> into a text format.
+     *
+     * @param task A specific task
+     * @return String of a task
+     */
     public String turnTaskToText(Task task) {
         String message = task.getType();
 
