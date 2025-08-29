@@ -1,7 +1,6 @@
 package falco.interact;
 
 import falco.storage.TaskList;
-
 import falco.task.Task;
 
 import java.util.Scanner;
@@ -38,6 +37,26 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         return input;
+    }
+
+    /**
+     * Prints the list to user
+     *
+     * @param message Message
+     */
+    public void printList(String message) {
+        String header = "Sir, here are the tasks in your list: (￣^￣ )ゞ";
+        bordify(header + "\n" + message);
+    }
+
+    /**
+     * Prints the "keyword" list to user
+     *
+     * @param message Message
+     */
+    public void findList(String message) {
+        String header = "Sir, here are the matching tasks in your list: (￣^￣ )ゞ";
+        bordify(header + "\n" + message);
     }
 
     /**
@@ -103,13 +122,6 @@ public class Ui {
                 "\n\t" + removedTask +
                 "\nNow you have " + list.getSize() + " tasks in the list, Sir! (￣^￣ )ゞ";
         bordify(message);
-    }
-
-    /**
-     * Prints out all the list text.
-     */
-    public void printList(String text) {
-        bordify(text);
     }
 
     /**

@@ -41,14 +41,30 @@ public class Parser {
     public void executeList() throws FalcoException {
         int n = tasks.getSize();
         if (n == 0) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+            tasks.throwEmptyList();
         } else {
-            StringBuilder message = new StringBuilder("Sir, here are the tasks in your list: (￣^￣ )ゞ");
-            for (int i = 0; i < n; i++) {
-                message.append("\n" + (i + 1) + "." + tasks.getTask(i).toString());
-            }
-            ui.printList(message.toString());
+            String message = tasks.printList();
+            ui.printList(message);
         }
+    }
+
+    /**
+     * Find all the <code>Task</code> in the <code>TaskList</code> that has the "keyword"
+     * and print it out.
+     * <p>
+     * If input is unclear, throws a <code>FalcoException</code>
+     *
+     * @param input Keyword input
+     * @throws FalcoException If input is unclear
+     */
+    public void executeFind(String input) throws FalcoException {
+        String[] parts = input.split(" ", 2);
+        if (parts.length == 1) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_FIND);
+        }
+        String keyword = parts[1];
+        String foundList = tasks.findKeyword(keyword);
+        ui.findList(foundList);
     }
 
     /**
@@ -248,6 +264,8 @@ public class Parser {
                     executeList();
                 } else if (input.equalsIgnoreCase("reset")) {
                     executeReset();
+                } else if (input.toLowerCase().startsWith("find")) {
+                    executeFind(input);
                 } else if (input.toLowerCase().startsWith("delete")) {
                     executeDelete(input);
                 } else if (input.toLowerCase().startsWith("mark")) {

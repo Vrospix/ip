@@ -27,10 +27,89 @@ public class TaskList {
         this.tasks = storageload;
     }
 
+    /**
+     * Throws a <code>FalcoException</code> directly
+     *
+     * @throws FalcoException
+     */
+    public void throwEmptyList() throws FalcoException {
+        throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+    }
+
+    /**
+     * Throws a <code>FalcoException</code> directly
+     *
+     * @throws FalcoException
+     */
+    public void throwNotFindList() throws FalcoException {
+        throw new FalcoException(FalcoException.ErrorType.NOT_FOUND);
+    }
+
+    /**
+     * Finds all the tasks containing the "keyword"
+     * @param keyword
+     * @return
+     * @throws FalcoException
+     */
+    public String findKeyword(String keyword) throws FalcoException {
+        if (tasks.isEmpty()) {
+            throwEmptyList();
+        }
+        TaskList copyList = new TaskList();
+        for (int i = 0; i < getSize(); i++) {
+            Task task = getTask(i);
+            String taskDescAny = task.getDescription().toLowerCase();
+            if (taskDescAny.contains(keyword.toLowerCase())) {
+                copyList.insertList(task);
+            }
+        }
+
+
+        int size = copyList.getSize();
+        if (size == 0) {
+            throwNotFindList();
+        }
+        StringBuilder message = new StringBuilder("1." + copyList.getTask(0).toString());
+        for (int i = 1; i < size; i++) {
+            message.append("\n" + (i + 1) + "." + copyList.getTask(i).toString());
+        }
+        return message.toString();
+    }
+
+    /**
+     * Turns all the <code>Task</code> in the <code>TaskList</code> into set of strings.
+     * <p>
+     * If <code>TaskList</code> is empty, throws an <code>FalcoException</code>.
+     *
+     * @return String
+     * @throws FalcoException If <code>TaskList</code> is empty
+     */
+    public String printList() throws FalcoException {
+        if (getSize() == 0) {
+            throwEmptyList();
+        }
+        StringBuilder message = new StringBuilder("1." + getTask(0).toString());
+        for (int i = 1; i < getSize(); i++) {
+            message.append("\n" + (i + 1) + "." + getTask(i).toString());
+        }
+
+        return message.toString();
+    }
+
+    /**
+     * Return the amount of tasks inside <code>TaskList</code>
+     *
+     * @return <code>int</code>
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Return the arraylist that contains the tasks
+     *
+     * @return <code>ArrayList</code> Task
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
@@ -73,7 +152,7 @@ public class TaskList {
      */
     public void deleteTask(int i) throws FalcoException {
         if (tasks.isEmpty()) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+            throwEmptyList();
         } else {
             try {
                 tasks.remove(i);
