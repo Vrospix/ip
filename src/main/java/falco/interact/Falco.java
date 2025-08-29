@@ -22,7 +22,7 @@ public class Falco {
     }
 
     public void run() {
-        ui.greetings();
+        ui.sayGreetings();
         Parser parser = new Parser(tasks, storage);
         parser.parse(ui.askInput());
     }

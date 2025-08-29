@@ -1,6 +1,6 @@
 package falco.exception;
 
-public class FalcoException extends Exception{
+public class FalcoException extends Exception {
     public enum ErrorType {
         UNKNOWN_COMMAND,
         EMPTY_TASK,

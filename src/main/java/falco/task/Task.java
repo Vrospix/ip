@@ -25,7 +25,7 @@ public abstract class Task {
         return this.task;
     }
 
-    public void changeDescription(String newDesc) {
+    public void setDescription(String newDesc) {
         this.task = newDesc;
     }
 
