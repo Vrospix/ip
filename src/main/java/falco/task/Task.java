@@ -48,13 +48,13 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
-
+    
     /**
      * Change the description of the task.
      *
      * @param newDesc New description task
      */
-    public void changeDescription(String newDesc) {
+    public void setDescription(String newDesc) {
         this.description = newDesc;
     }
 

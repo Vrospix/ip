@@ -1,13 +1,16 @@
 package falco.storage;
 
 import falco.exception.FalcoException;
+
 import falco.task.Deadline;
 import falco.task.Event;
 import falco.task.Task;
 import falco.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,7 +88,7 @@ public class Storage {
      * @throws IOException If save process goes wrong
      */
     public void save(TaskList tasks) throws IOException {
-        ArrayList<Task> taskList = tasks.getList();
+        ArrayList<Task> taskList = tasks.getTasks();
         FileWriter fw = new FileWriter(this.filePath, false);
         for(Task task : taskList) {
             String text = turnTaskToText(task);

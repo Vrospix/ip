@@ -33,7 +33,7 @@ public class Falco {
      * Run the system to start <code>Falco</code>.
      */
     public void run() {
-        ui.greetings();
+        ui.sayGreetings();
         Parser parser = new Parser(tasks, storage);
         parser.parse(ui.askInput());
     }

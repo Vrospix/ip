@@ -2,19 +2,20 @@ package falco.storage;
 
 import falco.exception.FalcoException;
 import falco.task.Task;
+
 import java.util.ArrayList;
 
 /**
  * Acts as a list for tasks.
  */
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates an instance of <code>TaskList</code>
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -23,22 +24,22 @@ public class TaskList {
      * @param storageload A premade ArrayList of tasks
      */
     public TaskList(ArrayList<Task> storageload) {
-        this.list = storageload;
+        this.tasks = storageload;
     }
 
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
-    public ArrayList<Task> getList(){
-        return this.list;
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     /**
      * Reset the list back to empty.
      */
     public void resetList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
 
@@ -48,7 +49,7 @@ public class TaskList {
      * @param task A specific task
      */
     public void insertList(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -60,7 +61,7 @@ public class TaskList {
      * @throws RuntimeException If 'i' is out of bound
      */
     public Task getTask(int i) throws RuntimeException {
-        return list.get(i);
+        return tasks.get(i);
     }
 
     /**
@@ -71,11 +72,11 @@ public class TaskList {
      * @throws FalcoException If list is empty
      */
     public void deleteTask(int i) throws FalcoException {
-        if (list.isEmpty()) {
+        if (tasks.isEmpty()) {
             throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
         } else {
             try {
-                list.remove(i);
+                tasks.remove(i);
             } catch (Exception e) {
                 throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
             }
