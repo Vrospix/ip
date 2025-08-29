@@ -71,21 +71,6 @@ public class Ui {
         bordify(message);
     }
 
-    /**
-     * Print out all the task inside list
-     */
-    public void printList(TaskList list) throws FalcoException {
-        int n = list.getSize();
-        if (n == 0) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
-        } else {
-            StringBuilder message = new StringBuilder("Sir, here are the tasks in your list: (￣^￣ )ゞ");
-            for (int i = 0; i < n; i++) {
-                message.append("\n" + (i + 1) + "." + list.getTask(i).toString());
-            }
-            bordify(message.toString());
-        }
-    }
 
     public void insertListDone(TaskList tasksList, Task task) {
         String taskText = (tasksList.getSize() == 1) ? " task"  : " tasks";

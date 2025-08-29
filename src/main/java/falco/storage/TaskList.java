@@ -15,6 +15,38 @@ public class TaskList {
         this.list = storageload;
     }
 
+    public void throwEmptyList() throws FalcoException {
+        throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+    }
+
+    public String findKeyword(String keyword) throws FalcoException {
+        if (list.isEmpty()) {
+            throwEmptyList();
+        }
+        TaskList copyList = new TaskList();
+        for (int i = 0; i < getSize(); i++) {
+            Task task = getTask(i);
+            String taskDescAny = task.getDescription().toLowerCase();
+            if (taskDescAny.contains(keyword.toLowerCase())) {
+                copyList.insertList(task);
+            }
+        }
+        StringBuilder message = new StringBuilder("Sir, here are the matching tasks in your list: (￣^￣ )ゞ");
+        int size = copyList.getSize();
+        for (int i = 0; i < size; i++) {
+            message.append("\n" + (i + 1) + "." + copyList.getTask(i).toString());
+        }
+        return message.toString();
+    }
+
+    public String printList() {
+        StringBuilder message = new StringBuilder("Sir, here are the tasks in your list: (￣^￣ )ゞ");
+        for (int i = 0; i < getSize(); i++) {
+            message.append("\n" + (i + 1) + "." + getTask(i).toString());
+        }
+        return message.toString();
+    }
+
     public int getSize() {
         return list.size();
     }
@@ -58,7 +90,7 @@ public class TaskList {
      */
     public void deleteTask(int i) throws FalcoException {
         if (list.isEmpty()) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_LIST);
+            throwEmptyList();
         } else {
             try {
                 list.remove(i);

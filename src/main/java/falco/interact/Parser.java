@@ -19,8 +19,24 @@ public class Parser {
         this.storage = storage;
     }
 
+    public void executeFind(String input) throws FalcoException {
+        String[] parts = input.split(" ", 2);
+        if (parts.length == 1) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_FIND);
+        }
+        String keyword = parts[1];
+        String foundList = tasks.findKeyword(keyword);
+        ui.bordify(foundList);
+    }
+
     public void executeList() throws FalcoException {
-        ui.printList(tasks);
+        int n = tasks.getSize();
+        if (n == 0) {
+            tasks.throwEmptyList();
+        } else {
+            String message = tasks.printList();
+            ui.bordify(message);
+        }
     }
 
     public void executeReset() throws IOException {
@@ -146,6 +162,8 @@ public class Parser {
                     executeList();
                 } else if (input.equalsIgnoreCase("reset")) {
                     executeReset();
+                } else if (input.toLowerCase().startsWith("find")) {
+                    executeFind(input);
                 } else if (input.toLowerCase().startsWith("delete")) {
                     executeDelete(input);
                 } else if (input.toLowerCase().startsWith("mark")) {

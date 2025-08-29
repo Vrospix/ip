@@ -10,7 +10,8 @@ public class FalcoException extends Exception{
         UNCLEAR_MARK,
         OUTOFBOUNDS,
         EMPTY_LIST,
-        WRONGFORMATTIME
+        WRONGFORMATTIME,
+        UNCLEAR_FIND
     }
 
     private ErrorType type;
@@ -47,6 +48,9 @@ public class FalcoException extends Exception{
         case WRONGFORMATTIME:
             return "Sir, please format your time: dd/MM/yyyy HHmm | e.g. 12/10/2019 1800" +
                     "\n that way I can understand it, Sir (ಠ_ಠ)";
+            case UNCLEAR_FIND:
+                return "Sir, your find is invalid. (ಠ_ಠ)" +
+                        "\nTry to specify a keyword to find";
         default:
             return "I don't understand, Sir ૮(˶ㅠ︿ㅠ)ა";
         }
