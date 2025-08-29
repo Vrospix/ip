@@ -1,7 +1,14 @@
 package falco.task;
-
+/**
+ * Represents a task that has no time.
+ */
 public class Todo extends Task {
 
+    /**
+     * Creates an instance of <code>Todo</code> with task description
+     *
+     * @param task Task description
+     */
     public Todo(String task) {
         super(task);
     }

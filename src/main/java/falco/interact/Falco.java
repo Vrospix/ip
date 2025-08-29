@@ -3,12 +3,20 @@ package falco.interact;
 import falco.storage.Storage;
 import falco.storage.TaskList;
 
+/**
+ * Represents the chatbot named <code>Falco</code>.
+ */
 public class Falco {
     private final static String LIST_PATH = "./data/falcolist.txt";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Create a new <code>Falco</code> instance with the designated file path.
+     *
+     * @param filePath A path directory to the save file
+     */
     public Falco(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Falco {
 
     }
 
+    /**
+     * Run the system to start <code>Falco</code>.
+     */
     public void run() {
         ui.greetings();
         Parser parser = new Parser(tasks, storage);

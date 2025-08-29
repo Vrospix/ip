@@ -1,6 +1,10 @@
 package falco.exception;
 
+/**
+ * Represents exceptions that are captured in <code>Falco</code>
+ */
 public class FalcoException extends Exception{
+
     public enum ErrorType {
         UNKNOWN_COMMAND,
         EMPTY_TASK,
@@ -15,6 +19,11 @@ public class FalcoException extends Exception{
 
     private ErrorType type;
 
+    /**
+     * Create a new <code>FalcoException</code> instance with the corresponding ErrorType.
+     *
+     * @param type Type of ErrorType
+     */
     public FalcoException(ErrorType type) {
         this.type = type;
     }
