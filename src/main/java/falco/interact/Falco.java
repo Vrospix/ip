@@ -7,7 +7,7 @@ import falco.storage.TaskList;
  * Represents the chatbot named <code>Falco</code>.
  */
 public class Falco {
-    private final static String LIST_PATH = "./data/falcolist.txt";
+    private static final String LIST_PATH = "./data/falcolist.txt";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
