@@ -1,13 +1,14 @@
 package falco.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import falco.exception.FalcoException;
 import falco.task.Deadline;
 import falco.task.Event;
 import falco.task.Task;
 import falco.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
 
@@ -48,7 +49,7 @@ public class StorageTest {
 
             assertEquals(2, 3); //Will cause test case fail
         } catch (FalcoException e) {
-            assertEquals(2,2);
+            assertEquals(2, 2);
         }
     }
 }

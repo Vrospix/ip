@@ -1,10 +1,10 @@
 package falco.task;
 
-import falco.exception.FalcoException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import falco.exception.FalcoException;
 
 /**
  * Represents a task that has a deadline.
@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * @param task Task description
      * @param bytime Deadline time
      * @throws FalcoException If time format is wrong
-     * </p>
+     *
      */
     public Deadline(String task, String bytime) throws FalcoException {
         super(task);

@@ -1,10 +1,10 @@
 package falco.task;
 
-import falco.exception.FalcoException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import falco.exception.FalcoException;
 
 /**
  * Represents a task that is an event. An <code>Event</code> has a
@@ -23,7 +23,6 @@ public class Event extends Task {
      * @param fromTime Start time
      * @param toTime End time
      * @throws FalcoException If time format is wrong
-     * </p>
      */
     public Event(String task, String fromTime, String toTime) throws FalcoException {
         super(task);

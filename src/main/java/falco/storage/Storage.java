@@ -1,18 +1,18 @@
 package falco.storage;
 
-import falco.exception.FalcoException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
+import falco.exception.FalcoException;
 import falco.task.Deadline;
 import falco.task.Event;
 import falco.task.Task;
 import falco.task.Todo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a <code>storage</code> to save a <code>TaskList</code>.
@@ -45,7 +45,7 @@ public class Storage {
         }
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner s = new Scanner(file);
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             taskList.add(turnTextToTask(s.nextLine()));
         }
         return taskList;
@@ -90,7 +90,7 @@ public class Storage {
     public void save(TaskList tasks) throws IOException {
         ArrayList<Task> taskList = tasks.getTasks();
         FileWriter fw = new FileWriter(this.filePath, false);
-        for(Task task : taskList) {
+        for (Task task : taskList) {
             String text = turnTaskToText(task);
             fw.append(text + "\n");
         }
@@ -115,9 +115,10 @@ public class Storage {
         if (task instanceof Deadline) {
             message = message + task.getDescription() + " | " + ((Deadline) task).getBytime();
         } else if (task instanceof Event) {
-            message = message + task.getDescription() + " | " + ((Event) task).getFrom() + " - " + ((Event) task).getTo();
+            message = message + task.getDescription() + " | "
+                    + ((Event) task).getFrom() + " - " + ((Event) task).getTo();
         } else {
-            message =  message + task.getDescription();
+            message = message + task.getDescription();
         }
 
         return message;

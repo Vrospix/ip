@@ -1,9 +1,9 @@
 package falco.storage;
 
+import java.util.ArrayList;
+
 import falco.exception.FalcoException;
 import falco.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Acts as a list for tasks.

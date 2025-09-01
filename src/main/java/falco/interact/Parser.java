@@ -1,16 +1,14 @@
 package falco.interact;
 
-import falco.exception.FalcoException;
+import java.io.IOException;
 
+import falco.exception.FalcoException;
 import falco.storage.Storage;
 import falco.storage.TaskList;
-
 import falco.task.Deadline;
 import falco.task.Event;
 import falco.task.Task;
 import falco.task.Todo;
-
-import java.io.IOException;
 
 /**
  * Parses the command input by user.
