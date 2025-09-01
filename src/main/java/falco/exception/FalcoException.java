@@ -3,7 +3,7 @@ package falco.exception;
 /**
  * Represents exceptions that are captured in <code>Falco</code>
  */
-public class FalcoException extends Exception{
+public class FalcoException extends Exception {
 
     public enum ErrorType {
         UNKNOWN_COMMAND,
