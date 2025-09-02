@@ -16,7 +16,7 @@ import falco.task.Todo;
 public class ParserGUI {
     private TaskList tasks;
     private Storage storage;
-    private UiResponse ui = new UiResponse();
+    private UiForGUI ui = new UiForGUI();
 
     /**
      * Create an instance of <code>Parser</code> with corresponding
@@ -260,6 +260,8 @@ public class ParserGUI {
                 return executeList();
             } else if (input.equalsIgnoreCase("reset")) {
                 return executeReset();
+            } else if (input.equalsIgnoreCase("help")) {
+                return ui.helpUser();
             } else if (input.toLowerCase().startsWith("find")) {
                 return executeFind(input);
             } else if (input.toLowerCase().startsWith("delete")) {
