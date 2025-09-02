@@ -1,4 +1,5 @@
 T | 1 | buy bread
 T | 0 | buy milk
 T | 1 | beat meat
-D | 0 | hw | 05/10/2025 1800
+D | 1 | hw | 05/10/2025 1800
+E | 0 | zoom meeting | 09/09/2025 1800 - 09/09/2025 2000

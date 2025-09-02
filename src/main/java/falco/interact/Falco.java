@@ -7,11 +7,10 @@ import falco.storage.TaskList;
  * Represents the chatbot named <code>Falco</code>.
  */
 public class Falco {
-    private static final String LIST_PATH = "./data/falcolist.txt";
+    public static final String LIST_PATH = "./data/falcolist.txt";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
-
     /**
      * Create a new <code>Falco</code> instance with the designated file path.
      *
@@ -38,8 +37,19 @@ public class Falco {
         parser.parse(ui.askInput());
     }
 
-    public static void main(String[] args) {
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        ParserGUI parser = new ParserGUI(tasks, storage);
+        String response = parser.parse(input);
+        return response;
+    }
+
+    public static void main(String ... args) {
         new Falco(LIST_PATH).run();
     }
+
+
 }
 
