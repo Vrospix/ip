@@ -9,13 +9,13 @@ import falco.task.Task;
  * Represents the UI in <code>Falco</code>. A <code>UI</code>
  * design to interact directly with the user.
  */
-public class UiResponse {
-    private static final String BORDER = "________________________________________________________";
-
+public class UiForGUI {
+    private static final String BORDER = "_________________________________________________________"
+            + "_______________________________________________";
     /**
      * Creates a UiResponse instance
      */
-    public UiResponse() {}
+    public UiForGUI() {}
 
     /**
      * Puts border before and after message.
@@ -27,17 +27,12 @@ public class UiResponse {
         return result;
     }
 
-    /**
-     * Scans the input from the user.
-     *
-     * @return String input
-     */
-    public String askInput() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        return input;
+    public String helpUser() {
+        String message = "Here are the commands available: (￣^￣ )ゞ"
+                + "\nlist, reset, help, find, delete, mark, "
+                + "unmark, todo, deadline, event";
+        return bordify(message);
     }
-
     /**
      * Prints the list to user
      *

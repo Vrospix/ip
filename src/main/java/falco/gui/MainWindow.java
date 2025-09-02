@@ -1,8 +1,7 @@
 package falco.gui;
 
 import falco.interact.Falco;
-import falco.interact.Ui;
-import falco.interact.UiResponse;
+import falco.interact.UiForGUI;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,10 +26,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Falco falco;
-    private UiResponse ui = new UiResponse();
+    private UiForGUI ui = new UiForGUI();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image falcoImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image falcoImage = new Image(this.getClass().getResourceAsStream("/images/DaFalco.png"));
 
     @FXML
     public void initialize() {
