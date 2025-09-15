@@ -327,7 +327,7 @@ public class ParserGUI {
     }
 
     /**
-     * Create a new <code>ToDo</code> task and store it inside <code>TaskList</code>.
+     * Create a new <code>Todo</code> task and store it inside <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
