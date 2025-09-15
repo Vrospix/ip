@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -25,7 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(675);
-            stage.setMaxWidth(675);
+            stage.setMaxWidth(1500);
             fxmlLoader.<MainWindow>getController().setFalco(falco);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {
