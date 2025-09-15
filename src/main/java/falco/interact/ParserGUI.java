@@ -170,6 +170,11 @@ public class ParserGUI {
             throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE);
         }
         String desc = details[0].trim();
+        if (desc.isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
+        }
+        assert !desc.isBlank() : "desc should not be empty";
+        
         String time = details[1].trim();
 
         Task task = new Deadline(desc, time);
@@ -197,9 +202,14 @@ public class ParserGUI {
         if (details.length == 1) {
             throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
         }
-        String desc = details[0].trim();
-        String time = details[1];
 
+        String desc = details[0].trim();
+        if (desc.isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
+        }
+        assert !desc.isBlank() : "desc should not be empty";
+
+        String time = details[1];
         String[] spantime = time.split("/to", 2);
         if (spantime.length == 1 || spantime[1].isBlank()) {
             throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
@@ -227,6 +237,11 @@ public class ParserGUI {
             throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
         }
         String desc = parts[1].trim();
+
+        if (desc.isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
+        }
+        assert !desc.isBlank() : "desc should not be empty";
 
         Task task = new Todo(desc);
 
