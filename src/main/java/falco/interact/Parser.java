@@ -30,20 +30,54 @@ public class Parser {
     }
 
     /**
+     * Split the first word in input with the rest
+     * If input only contains one word, throw out a <code>FalcoException</code>.
+     *
+     * @param input String input from user
+     * @param errorType The errorType to throw if exception is caught
+     * @return Array of strings
+     * @throws FalcoException If input only contains one word
+     */
+    private String[] splitInput(String input, FalcoException.ErrorType errorType) throws FalcoException {
+        String[] parts = input.split(" ");
+        if (parts.length == 1) {
+            throw new FalcoException(errorType);
+        }
+        return parts;
+    }
+
+    /**
+     * Transform the string integer into an integer data type
+     * If input string is invalid, throw out a <code>FalcoException</code>.
+     *
+     * @param input String input from user
+     * @return Integer
+     * @throws FalcoException If input string is invalid
+     */
+    private int transformInputToInt(String input) throws FalcoException {
+        try {
+            int index = Integer.parseInt(input) - 1;
+            return index;
+        } catch (Exception e) {
+            throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
      * Transform all the <code>Tasks</code> in the <code>TaskList</code> into String.
      * Then asks <code>Ui</code> to print the String.
      * If <code>TaskList</code> is empty, throw out a <code>FalcoException</code>.
      *
      * @throws FalcoException If tasklist is empty
      */
-    public void executeList() throws FalcoException {
+    private void executeList() throws FalcoException {
         int n = tasks.getSize();
         if (n == 0) {
             tasks.throwEmptyList();
-        } else {
-            String message = tasks.printList();
-            ui.printList(message);
         }
+
+        String message = tasks.printList();
+        ui.printList(message);
     }
 
     /**
@@ -55,11 +89,8 @@ public class Parser {
      * @param input Keyword input
      * @throws FalcoException If input is unclear
      */
-    public void executeFind(String input) throws FalcoException {
-        String[] parts = input.split(" ", 2);
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_FIND);
-        }
+    private void executeFind(String input) throws FalcoException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.UNCLEAR_FIND);
         String keyword = parts[1];
         String foundList = tasks.findKeyword(keyword);
         ui.findList(foundList);
@@ -71,7 +102,7 @@ public class Parser {
      *
      * @throws FalcoException If save process fails
      */
-    public void executeReset() throws IOException {
+    private void executeReset() throws IOException {
         tasks.resetList();
         ui.resetListDone();
         storage.save(tasks);
@@ -86,19 +117,12 @@ public class Parser {
      * @throws FalcoException if input fails/unclear
      * @throws IOException if save process fails
      */
-    public void executeDelete(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ");
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_DELETE);
-        }
-        try {
-            int index = Integer.parseInt(parts[1]) - 1;
-            Task removedTask = tasks.getTask(index);
-            tasks.deleteTask(index);
-            ui.deleteTaskDone(tasks, removedTask);
-        } catch (Exception e) {
-            throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
-        }
+    private void executeDelete(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.UNCLEAR_DELETE);
+        int index = transformInputToInt(parts[1]);
+        Task removedTask = tasks.getTask(index);
+        tasks.deleteTask(index);
+        ui.deleteTaskDone(tasks, removedTask);
         storage.save(tasks);
     }
 
@@ -111,18 +135,11 @@ public class Parser {
      * @throws FalcoException if input fails/unclear
      * @throws IOException if save process fails
      */
-    public void executeMark(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ");
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_MARK);
-        }
-        try {
-            int index = Integer.parseInt(parts[1]) - 1;
-            tasks.markTask(index);
-            ui.markTaskDone(tasks.getTask(index));
-        } catch (RuntimeException e) {
-            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
-        }
+    private void executeMark(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.UNCLEAR_MARK);
+        int index = transformInputToInt(parts[1]);
+        tasks.markTask(index);
+        ui.markTaskDone(tasks.getTask(index));
         storage.save(tasks);
     }
 
@@ -135,19 +152,28 @@ public class Parser {
      * @throws FalcoException If input fails/unclear
      * @throws IOException If save process fails
      */
-    public void executeUnmark(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ");
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_MARK);
-        }
-        try {
-            int index = Integer.parseInt(parts[1]) - 1;
-            tasks.unmarkTask(index);
-            ui.unmarkTaskDone(tasks.getTask(index));
-        } catch (RuntimeException e) {
-            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
-        }
+    private void executeUnmark(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.UNCLEAR_MARK);
+        int index = transformInputToInt(parts[1]);
+        tasks.unmarkTask(index);
+        ui.unmarkTaskDone(tasks.getTask(index));
         storage.save(tasks);
+    }
+
+    /**
+     * Split the input for <code>Deadline</code> task creation
+     * If input fails/unclear, throws out a <code>FalcoException</code>.
+     *
+     * @param input String input from user
+     * @return Array of strings
+     * @throws FalcoException If input fails/unclear
+     */
+    private String[] splitDeadlineInput(String input) throws FalcoException {
+        String[] details = input.split("/by", 2);
+        if (details.length == 1 || details[1].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE);
+        }
+        return details;
     }
 
     /**
@@ -159,17 +185,13 @@ public class Parser {
      * @throws FalcoException If input fails/unclear
      * @throws IOException If save process fails
      */
-    public void createDeadline(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ", 2);
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
-        }
+    private void createDeadline(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.EMPTY_TASK);
+
         String remaining = parts[1];
 
-        String[] details = remaining.split("/by", 2);
-        if (details.length == 1 || details[1].isBlank()) {
-            throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE);
-        }
+        String[] details = splitDeadlineInput(remaining);
+
         String desc = details[0].trim();
         String time = details[1].trim();
 
@@ -177,6 +199,38 @@ public class Parser {
 
         insertSave(tasks, task);
     }
+
+    /**
+     * Split the input for <code>Event</code> task creation
+     * If input fails/unclear, throws out a <code>FalcoException</code>.
+     *
+     * @param input String input from user
+     * @return Array of strings
+     * @throws FalcoException If input fails/unclear
+     */
+    private String[] splitEventInput(String input) throws FalcoException {
+        String[] result = new String[3];
+        String[] details = input.split("/from", 2);
+        if (details.length == 1 || details[1].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
+        }
+        result[0] = details[0].trim();
+
+        String time = details[1];
+
+        String[] spantime = time.split("/to", 2);
+        if (spantime.length == 1 || spantime[1].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
+        }
+        String from = spantime[0].trim();
+        String to = spantime[1].trim();
+
+        result[1] = from;
+        result[2] = to;
+
+        return result;
+    }
+
 
     /**
      * Create a new <code>Event</code> task and store it inside <code>TaskList</code>.
@@ -187,26 +241,16 @@ public class Parser {
      * @throws FalcoException If input fails/unclear
      * @throws IOException If save process fails
      */
-    public void createEvent(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ", 2);
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
-        }
+    private void createEvent(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.EMPTY_TASK);
+
         String remaining = parts[1];
 
-        String[] details = remaining.split("/from", 2);
-        if (details.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
-        }
-        String desc = details[0].trim();
-        String time = details[1];
+        String[] details = splitEventInput(remaining);
 
-        String[] spantime = time.split("/to", 2);
-        if (spantime.length == 1 || spantime[1].isBlank()) {
-            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
-        }
-        String from = spantime[0].trim();
-        String to = spantime[1].trim();
+        String desc = details[0];
+        String from = details[1];
+        String to = details[2];
 
         Task task = new Event(desc, from, to);
 
@@ -222,11 +266,9 @@ public class Parser {
      * @throws FalcoException If input fails/unclear
      * @throws IOException If save process fails
      */
-    public void createTodo(String input) throws FalcoException, IOException {
-        String[] parts = input.split(" ", 2);
-        if (parts.length == 1) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
-        }
+    private void createTodo(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.EMPTY_TASK);
+
         String desc = parts[1].trim();
 
         Task task = new Todo(desc);
@@ -243,7 +285,7 @@ public class Parser {
      * @param task A specific task
      * @throws IOException if save process fails
      */
-    public void insertSave(TaskList tasks, Task task) throws IOException {
+    private void insertSave(TaskList tasks, Task task) throws IOException {
         tasks.insertList(task);
         ui.insertListDone(tasks, task);
         storage.save(tasks);
@@ -255,26 +297,26 @@ public class Parser {
      * @param text input from user
      */
     public void parse(String text) {
-        String input = text;
+        String input = text.toLowerCase().trim();
         while (!input.equalsIgnoreCase("bye")) {
             try {
                 if (input.equalsIgnoreCase("list")) {
                     executeList();
                 } else if (input.equalsIgnoreCase("reset")) {
                     executeReset();
-                } else if (input.toLowerCase().startsWith("find")) {
+                } else if (input.startsWith("find")) {
                     executeFind(input);
-                } else if (input.toLowerCase().startsWith("delete")) {
+                } else if (input.startsWith("delete")) {
                     executeDelete(input);
-                } else if (input.toLowerCase().startsWith("mark")) {
+                } else if (input.startsWith("mark")) {
                     executeMark(input);
-                } else if (input.toLowerCase().startsWith("unmark")) {
+                } else if (input.startsWith("unmark")) {
                     executeUnmark(input);
-                } else if (input.toLowerCase().startsWith("deadline")) {
+                } else if (input.startsWith("deadline")) {
                     createDeadline(input);
-                } else if (input.toLowerCase().startsWith("event")) {
+                } else if (input.startsWith("event")) {
                     createEvent(input);
-                } else if (input.toLowerCase().startsWith("todo")) {
+                } else if (input.startsWith("todo")) {
                     createTodo(input);
                 } else {
                     throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
