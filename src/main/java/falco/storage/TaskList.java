@@ -97,7 +97,7 @@ public class TaskList {
     }
 
     /**
-     * Return the amount of tasks inside <code>TaskList</code>
+     * Returns the amount of tasks inside <code>TaskList</code>
      *
      * @return <code>int</code>
      */
@@ -106,7 +106,7 @@ public class TaskList {
     }
 
     /**
-     * Return the arraylist that contains the tasks
+     * Returns the arraylist that contains the tasks
      *
      * @return <code>ArrayList</code> Task
      */
@@ -115,7 +115,7 @@ public class TaskList {
     }
 
     /**
-     * Reset the list back to empty.
+     * Resets the list back to empty.
      */
     public void resetList() {
         this.tasks = new ArrayList<>();
@@ -139,8 +139,12 @@ public class TaskList {
      * @return a task from the list
      * @throws RuntimeException If 'i' is out of bound
      */
-    public Task getTask(int i) throws RuntimeException {
-        return tasks.get(i);
+    public Task getTask(int i) throws FalcoException {
+        try {
+            return tasks.get(i);
+        } catch (RuntimeException e) {
+            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+        }
     }
 
     /**
@@ -169,8 +173,12 @@ public class TaskList {
      * @param i The task number in the list
      * @throws RuntimeException If 'i' is out of bound
      */
-    public void markTask(int i) throws RuntimeException {
-        getTask(i).mark();
+    public void markTask(int i) throws FalcoException {
+        try {
+            getTask(i).mark();
+        } catch (RuntimeException e) {
+            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+        }
     }
 
     /**
@@ -180,8 +188,12 @@ public class TaskList {
      * @param i The task number in the list
      * @throws RuntimeException If 'i' is out of bound
      */
-    public void unmarkTask(int i) throws RuntimeException {
-        getTask(i).unmark();
+    public void unmarkTask(int i) throws FalcoException {
+        try {
+            getTask(i).unmark();
+        } catch (RuntimeException e) {
+            throw new FalcoException(FalcoException.ErrorType.OUTOFBOUNDS);
+        }
     }
 
 }
