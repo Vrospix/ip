@@ -175,7 +175,7 @@ public class Parser {
             throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
         }
         assert !desc.isBlank() : "desc should not be empty";
-        
+
         String time = details[1].trim();
 
         Task task = new Deadline(desc, time);
