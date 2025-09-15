@@ -7,11 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import falco.exception.FalcoException;
-import falco.task.Deadline;
-import falco.task.Event;
-import falco.task.Task;
-import falco.task.Todo;
-
+import falco.task.*;
 
 
 /**
@@ -69,6 +65,9 @@ public class Storage {
             task = new Event(parts[2].trim(), times[0].trim(), times[1].trim());
         } else if (parts[0].trim().equals("T")) {
             task = new Todo(parts[2].trim());
+        } else if (parts[0].trim().equals("P")) {
+            String[] times = parts[3].trim().split("-", 2);
+            task = new Period(parts[2].trim(), times[0].trim(), times[1].trim());
         } else {
             throw new FalcoException(FalcoException.ErrorType.UNKNOWN_COMMAND);
         }
@@ -117,6 +116,9 @@ public class Storage {
         } else if (task instanceof Event) {
             message = message + task.getDescription() + " | "
                     + ((Event) task).getFrom() + " - " + ((Event) task).getTo();
+        } else if (task instanceof Period) {
+            message = message + task.getDescription() + " | "
+                    + ((Period) task).getFrom() + " - " + ((Period) task).getTo();
         } else {
             message = message + task.getDescription();
         }

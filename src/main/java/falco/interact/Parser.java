@@ -5,10 +5,7 @@ import java.io.IOException;
 import falco.exception.FalcoException;
 import falco.storage.Storage;
 import falco.storage.TaskList;
-import falco.task.Deadline;
-import falco.task.Event;
-import falco.task.Task;
-import falco.task.Todo;
+import falco.task.*;
 
 /**
  * Parses the command input by user.
@@ -39,7 +36,7 @@ public class Parser {
      * @throws FalcoException If input only contains one word
      */
     private String[] splitInput(String input, FalcoException.ErrorType errorType) throws FalcoException {
-        String[] parts = input.split(" ");
+        String[] parts = input.split(" ",2);
         if (parts.length == 1) {
             throw new FalcoException(errorType);
         }
@@ -173,6 +170,12 @@ public class Parser {
         if (details.length == 1 || details[1].isBlank()) {
             throw new FalcoException(FalcoException.ErrorType.NOTIME_DEADLINE);
         }
+
+        if (details[0].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
+        }
+        assert !details[0].isBlank() : "desc should not be empty";
+
         return details;
     }
 
@@ -193,16 +196,12 @@ public class Parser {
         String[] details = splitDeadlineInput(remaining);
 
         String desc = details[0].trim();
-        if (desc.isBlank()) {
-            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
-        }
-        assert !desc.isBlank() : "desc should not be empty";
 
         String time = details[1].trim();
 
         Task task = new Deadline(desc, time);
 
-        insertSave(tasks, task);
+        insertSaveTask(tasks, task);
     }
 
     /**
@@ -219,14 +218,14 @@ public class Parser {
         if (details.length == 1 || details[1].isBlank()) {
             throw new FalcoException(FalcoException.ErrorType.UNCLEAR_EVENT);
         }
-      
-        result[0] = details[0].trim();
-      
+
         String desc = details[0].trim();
         if (desc.isBlank()) {
             throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
         }
         assert !desc.isBlank() : "desc should not be empty";
+
+        result[0] = desc;
 
         String time = details[1];
         String[] spantime = time.split("/to", 2);
@@ -265,7 +264,70 @@ public class Parser {
 
         Task task = new Event(desc, from, to);
 
-        insertSave(tasks, task);
+        insertSaveTask(tasks, task);
+    }
+
+    /**
+     * Split the input for <code>Period</code> task creation
+     * If input fails/unclear, throws out a <code>FalcoException</code>.
+     *
+     * @param input String input from user
+     * @return Array of strings
+     * @throws FalcoException If input fails/unclear
+     */
+    private String[] splitPeriodInput(String input) throws FalcoException {
+        String[] result = new String[3];
+        String[] details = input.split("/between", 2);
+        if (details.length == 1 || details[1].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_PERIOD);
+        }
+
+        String desc = details[0].trim();
+        if (desc.isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.EMPTY_TASK);
+        }
+        assert !desc.isBlank() : "desc should not be empty";
+
+        result[0] = desc;
+
+
+        String time = details[1];
+        String[] spantime = time.split("/and", 2);
+        if (spantime.length == 1 || spantime[1].isBlank()) {
+            throw new FalcoException(FalcoException.ErrorType.UNCLEAR_PERIOD);
+        }
+        String from = spantime[0].trim();
+        String to = spantime[1].trim();
+
+        result[1] = from;
+        result[2] = to;
+
+        return result;
+    }
+
+    /**
+     * Create a new <code>Period</code> task and store it inside <code>TaskList</code>.
+     * If input fails/unclear, throws out a <code>FalcoException</code>.
+     * If save process fails, throws out an <code>IOException</code>.
+     *
+     * @param input String input from user
+     * @throws FalcoException If input fails/unclear
+     * @throws IOException If save process fails
+     */
+    private void createPeriod(String input) throws FalcoException, IOException {
+        String[] parts = splitInput(input, FalcoException.ErrorType.EMPTY_TASK);
+
+        String remaining = parts[1];
+
+        String[] details = splitPeriodInput(remaining);
+
+        String desc = details[0];
+        String from = details[1];
+        String to = details[2];
+
+        Task task = new Period(desc, from, to);
+
+        insertSaveTask(tasks, task);
     }
 
     /**
@@ -289,7 +351,7 @@ public class Parser {
 
         Task task = new Todo(desc);
 
-        insertSave(tasks, task);
+        insertSaveTask(tasks, task);
     }
 
     /**
@@ -301,7 +363,7 @@ public class Parser {
      * @param task A specific task
      * @throws IOException if save process fails
      */
-    private void insertSave(TaskList tasks, Task task) throws IOException {
+    private void insertSaveTask(TaskList tasks, Task task) throws IOException {
         tasks.insertList(task);
         ui.insertListDone(tasks, task);
         storage.save(tasks);
@@ -320,6 +382,8 @@ public class Parser {
                     executeList();
                 } else if (input.equalsIgnoreCase("reset")) {
                     executeReset();
+                } else if (input.equalsIgnoreCase("help")) {
+                    ui.helpUser();
                 } else if (input.startsWith("find")) {
                     executeFind(input);
                 } else if (input.startsWith("delete")) {
@@ -332,6 +396,8 @@ public class Parser {
                     createDeadline(input);
                 } else if (input.startsWith("event")) {
                     createEvent(input);
+                } else if (input.startsWith("period")) {
+                    createPeriod(input);
                 } else if (input.startsWith("todo")) {
                     createTodo(input);
                 } else {

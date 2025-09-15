@@ -29,6 +29,18 @@ public class Ui {
     }
 
     /**
+     * Prints all the command available for Falco
+     *
+     * @return String message
+     */
+    public void helpUser() {
+        String message = "Here are the commands available: (￣^￣ )ゞ"
+                + "\nlist, reset, help, find, delete, mark, "
+                + "unmark, todo, deadline, event, period";
+        bordify(message);
+    }
+
+    /**
      * Scans the input from the user.
      *
      * @return String input
