@@ -1,6 +1,6 @@
 # Falco User Guide
 
-![Screenshot of Falco Chatbot's GUI being utilized as a list tracker.](../docs/Ui.png)
+![Screenshot of Falco Chatbot's GUI being utilized as a list tracker.](Ui.png)
 
 ### Welcome to Falco!
 
