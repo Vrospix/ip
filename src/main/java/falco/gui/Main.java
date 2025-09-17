@@ -23,11 +23,12 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Falco: Your most trusted chatbot");
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(675);
             stage.setMaxWidth(1500);
-            fxmlLoader.<MainWindow>getController().setFalco(falco);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setFalco(falco);  // inject the Falco instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

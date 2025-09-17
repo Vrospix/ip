@@ -80,7 +80,7 @@ public class Storage {
     }
 
     /**
-     * Save the <code>TaskList</code> to the designated file.
+     * Saves the <code>TaskList</code> to the designated file.
      * If save process goes wrong, throws an <code>IOException</code>.
      *
      * @param tasks List of tasks
@@ -97,7 +97,7 @@ public class Storage {
     }
 
     /**
-     * Turn the corresponding <code>task</code> into a text format.
+     * Turns the corresponding <code>task</code> into a text format.
      *
      * @param task A specific task
      * @return String of a task

@@ -35,8 +35,8 @@ public class Ui {
      */
     public void helpUser() {
         String message = "Here are the commands available: (￣^￣ )ゞ"
-                + "\nlist, reset, help, find, delete, mark, "
-                + "unmark, todo, deadline, event, period";
+                + "\nlist, reset, help, find, delete/remove, mark, "
+                + "unmark, todo, deadline, event, period, bye";
         bordify(message);
     }
 

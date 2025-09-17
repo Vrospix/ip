@@ -16,7 +16,7 @@ public class ParserGUI {
     private UiForGUI ui = new UiForGUI();
 
     /**
-     * Create an instance of <code>Parser</code> with corresponding
+     * Creates an instance of <code>Parser</code> with corresponding
      * <code>TaskList</code> and <code>Storage</code>.
      * @param tasks List of tasks
      * @param storage Storage of the list of tasks
@@ -27,7 +27,7 @@ public class ParserGUI {
     }
 
     /**
-     * Split the first word in input with the rest
+     * Splits the first word in input with the rest
      * If input only contains one word, throw out a <code>FalcoException</code>.
      *
      * @param input String input from user
@@ -44,7 +44,7 @@ public class ParserGUI {
     }
 
     /**
-     * Transform the string integer into an integer data type
+     * Transforms the string integer into an integer data type
      * If input string is invalid, throw out a <code>FalcoException</code>.
      *
      * @param input String input from user
@@ -61,7 +61,7 @@ public class ParserGUI {
     }
 
     /**
-     * Transform all the <code>Tasks</code> in the <code>TaskList</code> into String.
+     * Transforms all the <code>Tasks</code> in the <code>TaskList</code> into String.
      * Then asks <code>Ui</code> to print the String.
      * If <code>TaskList</code> is empty, throw out a <code>FalcoException</code>.
      *
@@ -76,7 +76,7 @@ public class ParserGUI {
     }
 
     /**
-     * Find all the <code>Task</code> in the <code>TaskList</code> that has the "keyword"
+     * Finds all the <code>Task</code> in the <code>TaskList</code> that has the "keyword"
      * and print it out.
      * <p>
      * If input is unclear, throws a <code>FalcoException</code>
@@ -92,7 +92,7 @@ public class ParserGUI {
     }
 
     /**
-     * Reset all the <code>Tasks</code> in <code>TaskList</code>.
+     * Resets all the <code>Tasks</code> in <code>TaskList</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
      * @throws FalcoException If save process fails
@@ -104,7 +104,7 @@ public class ParserGUI {
     }
 
     /**
-     * Delete a <code>Task</code> from the <code>TaskList</code>.
+     * Deletes a <code>Task</code> from the <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -122,7 +122,7 @@ public class ParserGUI {
     }
 
     /**
-     * Mark the designated <code>Task</code> inside the <code>TaskList</code>
+     * Marks the designated <code>Task</code> inside the <code>TaskList</code>
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -139,7 +139,7 @@ public class ParserGUI {
     }
 
     /**
-     * Unmark the designated <code>Task</code> inside the <code>TaskList</code>
+     * Unmarks the designated <code>Task</code> inside the <code>TaskList</code>
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -156,7 +156,7 @@ public class ParserGUI {
     }
 
     /**
-     * Split the input for <code>Deadline</code> task creation
+     * Splits the input for <code>Deadline</code> task creation
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      *
      * @param input String input from user
@@ -178,7 +178,7 @@ public class ParserGUI {
     }
 
     /**
-     * Create a new <code>Deadline</code> task and store it inside <code>TaskList</code>.
+     * Creates a new <code>Deadline</code> task and store it inside <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -203,7 +203,7 @@ public class ParserGUI {
     }
 
     /**
-     * Split the input for <code>Event</code> task creation
+     * Splits the input for <code>Event</code> task creation
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      *
      * @param input String input from user
@@ -239,7 +239,7 @@ public class ParserGUI {
     }
 
     /**
-     * Create a new <code>Event</code> task and store it inside <code>TaskList</code>.
+     * Creates a new <code>Event</code> task and store it inside <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -264,7 +264,7 @@ public class ParserGUI {
     }
 
     /**
-     * Split the input for <code>Period</code> task creation
+     * Splits the input for <code>Period</code> task creation
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      *
      * @param input String input from user
@@ -302,7 +302,7 @@ public class ParserGUI {
     }
 
     /**
-     * Create a new <code>Period</code> task and store it inside <code>TaskList</code>.
+     * Creates a new <code>Period</code> task and store it inside <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -327,7 +327,7 @@ public class ParserGUI {
     }
 
     /**
-     * Create a new <code>Todo</code> task and store it inside <code>TaskList</code>.
+     * Creates a new <code>Todo</code> task and store it inside <code>TaskList</code>.
      * If input fails/unclear, throws out a <code>FalcoException</code>.
      * If save process fails, throws out an <code>IOException</code>.
      *
@@ -351,8 +351,8 @@ public class ParserGUI {
     }
 
     /**
-     * Save the <code>Task</code> inside <code>TaskList</code>.
-     * Save the list to the <code>Storage</code> as well.
+     * Saves the <code>Task</code> inside <code>TaskList</code>.
+     * Saves the list to the <code>Storage</code> as well.
      * If save process fails, throws out an <code>IOException</code>.
      *
      * @param tasks List of tasks
@@ -366,7 +366,7 @@ public class ParserGUI {
     }
 
     /**
-     * Break down the input from user and execute function based on input
+     * Breaks down the input from user and execute function based on input
      *
      * @param text input from user
      */
@@ -381,7 +381,7 @@ public class ParserGUI {
                 return ui.helpUser();
             } else if (input.startsWith("find")) {
                 return executeFind(input);
-            } else if (input.startsWith("delete")) {
+            } else if (input.startsWith("delete") || input.startsWith("remove")) {
                 return executeDelete(input);
             } else if (input.startsWith("mark")) {
                 return executeMark(input);

@@ -1,6 +1,8 @@
-T | 1 | buy bread
+D | 1 | homework | 18/02/2025 1800
+P | 0 | collect certificate | 18/02/2025 1800 - 18/03/2025 0000
+E | 0 | zoom meeting | 20/08/2025 1800 - 20/08/2025 2000
+D | 0 | do homework | 18/08/2025 1800
+T | 0 | buy bread
+E | 0 | zoom meeting | 18/08/2025 1800 - 18/08/2025 2000
+P | 0 | collect certificate | 18/08/2025 1800 - 18/08/2025 2000
 T | 0 | buy milk
-T | 0 | beat meat
-D | 1 | hw | 05/10/2025 1800
-E | 1 | zoom meeting | 09/09/2025 1800 - 09/09/2025 2000
-P | 0 | collect certif | 18/08/2025 1800 - 20/08/2025 1800

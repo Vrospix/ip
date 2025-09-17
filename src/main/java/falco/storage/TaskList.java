@@ -123,7 +123,7 @@ public class TaskList {
 
 
     /**
-     * Insert a task inside the list.
+     * Inserts a task inside the list.
      *
      * @param task A specific task
      */
@@ -132,7 +132,7 @@ public class TaskList {
     }
 
     /**
-     * Get task-'i' from list.
+     * Gets task-'i' from list.
      * If 'i' is out of bound, throws a <code>RuntimeException</code>.
      *
      * @param i The task number in the list
@@ -148,7 +148,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the designated task-'i' from the list.
+     * Deletes the designated task-'i' from the list.
      * If list is empty, throws a <code>FalcoException</code>.
      *
      * @param i The task number in the list
@@ -167,7 +167,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the designated task in the list.
+     * Marks the designated task in the list.
      * If 'i' is out of bound, throws a <code>RuntimeException</code>.
      *
      * @param i The task number in the list
@@ -182,7 +182,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark the designated task in the list.
+     * Unmarks the designated task in the list.
      * If 'i' is out of bound, throws a <code>RuntimeException</code>.
      *
      * @param i The task number in the list

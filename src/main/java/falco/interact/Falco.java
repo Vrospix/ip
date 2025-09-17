@@ -11,15 +11,16 @@ public class Falco {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
+
     /**
-     * Create a new <code>Falco</code> instance with the designated file path.
+     * Creates a new <code>Falco</code> instance with the designated file path.
      *
      * @param filePath A path directory to the save file
      */
     public Falco(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
             ui.showLoadingError();
@@ -29,7 +30,7 @@ public class Falco {
     }
 
     /**
-     * Run the system to start <code>Falco</code>.
+     * Runs the system to start <code>Falco</code>.
      */
     public void run() {
         ui.sayGreetings();

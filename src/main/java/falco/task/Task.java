@@ -8,7 +8,7 @@ public abstract class Task {
     private String description;
 
     /**
-     * Initialize <code>Task</code> as not done and store the task description.
+     * Initializes <code>Task</code> as not done and store the task description.
      *
      * @param description Task description
      */
@@ -18,21 +18,21 @@ public abstract class Task {
     }
 
     /**
-     * Set the task as done.
+     * Sets the task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Set the task as not done.
+     * Sets the task as not done.
      */
     public void unmark() {
         this.isDone = false;
     }
 
     /**
-     * Check whether the task is done or not.
+     * Checks whether the task is done or not.
      *
      * @return <code>True</code> if task is done; otherwise, <code>False</code>
      */
@@ -41,7 +41,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the description of the task.
+     * Gets the description of the task.
      *
      * @return <code>description</code>
      */
@@ -50,7 +50,7 @@ public abstract class Task {
     }
     
     /**
-     * Get the type of task.
+     * Gets the type of task.
      *
      * @return the inital letter of the <code>Task</code>
      */
