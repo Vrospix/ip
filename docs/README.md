@@ -1,6 +1,6 @@
 # Falco User Guide
 
-![Screenshot of Falco Chatbot's GUI being utilized as a list tracker.](/docs/Ui.png)
+![Screenshot of Falco Chatbot's GUI being utilized as a list tracker.](/docs/Ui.png.png)
 
 ### Welcome to Falco!
 
@@ -8,11 +8,11 @@ Falco is your intelligent, interactive assistant designed to help keep track you
 Whether you want to do simple tasks, chase a deadline, or remind yourself of an event, Falco
 is here to help—anytime, anywhere.
 
-## Viewing help: 'help'
+## Viewing help: `help`
 
 Shows a message that gives list of available commands
 
-Format: 'help'
+Format: `help`
 
 ```
 ________________________________________________________________________________________________________
@@ -21,11 +21,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Adding no-time task: 'todo'
+## Adding no-time task: `todo`
 
 Adds task that has no time limit
 
-Format: 'todo <TASK DETAILS>'
+Format: `todo <TASK DETAILS>`
 
 Example: `todo buy bread`
 
@@ -37,11 +37,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Adding deadlines task: 'deadline'
+## Adding deadlines task: `deadline`
 
 Adds task that has a deadline. 
 
-Format: 'deadline <TASK DETAILS> /by dd/MM/yyyy hhMM'
+Format: `deadline <TASK DETAILS> /by dd/MM/yyyy hhMM`
 
 Example: `deadline do homework /by 18/08/2025 1800`
 
@@ -53,11 +53,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Adding events task: 'event'
+## Adding events task: `event`
 
 Adds task that is an event.
 
-Format: 'event <TASK DETAILS> /from dd/MM/yyyy hhMM /to dd/MM/yyyy hhMM'
+Format: `event <TASK DETAILS> /from dd/MM/yyyy hhMM /to dd/MM/yyyy hhMM`
 
 Example: `event zoom meeting /from 18/08/2025 1800 /to 18/08/2025 2000`
 
@@ -69,11 +69,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Adding period task: 'period'
+## Adding period task: `period`
 
 Adds task that must be done within a period.
 
-Format: 'period <TASK DETAILS> /between dd/MM/yyyy hhMM /and dd/MM/yyyy hhMM'
+Format: `period <TASK DETAILS> /between dd/MM/yyyy hhMM /and dd/MM/yyyy hhMM`
 
 Example: `period collect certificate /between 18/08/2025 1800 /and 18/08/2025 2000`
 
@@ -85,23 +85,23 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Listing all tasks: 'list'
+## Listing all tasks: `list`
 
 Shows a list of all tasks that has been posted.
 
-Format: 'list'
+Format: `list`
 
-## Resetting the list: 'reset'
+## Resetting the list: `reset`
 
 Resets the list by clearing out all tasks in the list.
 
-Format: 'reset'
+Format: `reset`
 
-## Finding tasks: 'find'
+## Finding tasks: `find`
 
 Finds and list out all the tasks containing the keyword. 
 
-Format: 'find <KEYWORD>'
+Format: `find <KEYWORD>`
 
 Example: `find buy`
 
@@ -113,28 +113,28 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________
 ```
 
-## Deleting a task: 'delete' 'remove'
+## Deleting a task: `delete` `remove`
 
 Deletes the specified task from the list.
 
-Format: 'delete <TASK NUMBER>' 'remove <TASK NUMBER>'
+Format: `delete <TASK NUMBER>` `remove <TASK NUMBER>`
 
-Example: 'delete 2' or 'remove 2' Removes out the number 2 task in the list.
+Example: `delete 2` or `remove 2` Removes out the number 2 task in the list.
 
-## Marking a task: 'mark'
+## Marking a task: `mark`
 
 Marks the specified task as done.
 
-Format: 'mark <TASK NUMBER>'
+Format: `mark <TASK NUMBER>`
 
-## Unmarking a task: 'unmark'
+## Unmarking a task: `unmark`
 
 Unmarks the specified task as done.
 
-Format: 'unmark <TASK NUMBER>'
+Format: `unmark <TASK NUMBER>`
 
-## Exiting the program: 'bye'
+## Exiting the program: `bye`
 
 Exits the program.
 
-Format: 'bye'
+Format: `bye`
