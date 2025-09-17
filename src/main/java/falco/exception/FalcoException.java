@@ -6,7 +6,7 @@ package falco.exception;
 public class FalcoException extends Exception {
 
     /**
-     * Enumerations of ErrorType
+     * Enumerations of ErrorType for <code>FalcoException</code>
      */
     public enum ErrorType {
         UNKNOWN_COMMAND,
@@ -26,7 +26,7 @@ public class FalcoException extends Exception {
     private ErrorType type;
 
     /**
-     * Create a new <code>FalcoException</code> instance with the corresponding ErrorType.
+     * Creates a new <code>FalcoException</code> instance with the corresponding ErrorType.
      *
      * @param type Type of ErrorType
      */
